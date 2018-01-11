@@ -44,6 +44,8 @@
 <td><c:out value="${p.price}"></c:out></td>
 <td><c:out value="${p.pstock}"></c:out></td>
 <td><img src="${pageContext.request.contextPath}/resources/${p.imgName}" height="50px" width="50px"></td>
+<c:set var="contextRoot" value="${pageContext.request.contextPath }"></c:set>
+<a class="btn btn-info" role="button" href="<c:url value="/prodDetails/${p.pid}"/>">Details</a>
 <tr>
 </c:forEach>
 </table>

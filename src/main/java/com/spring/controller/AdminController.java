@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -26,11 +27,13 @@ import com.spring.model.Product;
 import com.spring.model.Supplier;
 
 
+
 @Controller
 
 
 public class AdminController 
 {
+	
 	@Autowired
 	SupplierDAOImpl supplierDAOImpl;
 	@Autowired
@@ -38,13 +41,13 @@ public class AdminController
 	@Autowired
 	ProductDAOImpl  productDAOImpl;
 
-	
-	@RequestMapping("/adding")
+	@RequestMapping("/admin/adding")
 	public String adding()
 	{
 		return "adding";
 	}
-	@RequestMapping(value="/saveSupp",method=RequestMethod.POST)
+	
+	@RequestMapping(value="/admin/saveSupp",method=RequestMethod.POST)
 	@Transactional
 	public ModelAndView saveSuppData(@RequestParam("sid") int sid,@RequestParam("sname")String sname)
 	{
@@ -56,8 +59,8 @@ public class AdminController
 		mv.setViewName("adding");
 		return mv;
 	}
-	@RequestMapping(value="/saveCat",method=RequestMethod.POST)
-	@Transactional
+	@RequestMapping(value="/admin/saveCat",method=RequestMethod.POST)
+
 	public ModelAndView saveCatData(@RequestParam("cid") int cid,@RequestParam("cname") String cname)
 	{
 		ModelAndView mv=new ModelAndView();
@@ -67,8 +70,8 @@ public class AdminController
 		mv.setViewName("adding");
 		return mv;
 	}
-	@RequestMapping(value="/saveProduct",method=RequestMethod.POST)
-	@Transactional
+	@RequestMapping(value="/admin/saveProduct",method=RequestMethod.POST)
+
 	public String saveprod(HttpServletRequest request,@RequestParam("file")MultipartFile file)
 	{
 		Product prod= new Product();
@@ -82,7 +85,7 @@ public class AdminController
 		
 		String filepath =request.getSession().getServletContext().getRealPath("/");
 		String filename= file.getOriginalFilename();
-		//prod.setImagName(filename);
+		prod.setImagName(filename);
 		productDAOImpl.insertProduct(prod);
 		
 		
@@ -113,7 +116,7 @@ public class AdminController
 		m.addAttribute("prodList",productDAOImpl.retrieve());
 
 	}
-	@RequestMapping("/productList")
+	@RequestMapping("/admin/productList")
 	public ModelAndView prodlist()
 	{
 	ModelAndView mv= new ModelAndView();
@@ -122,7 +125,7 @@ public class AdminController
 	return mv;
 	}
 	
-	@RequestMapping("/supplierList")
+	@RequestMapping("/admin/supplierList")
 	public ModelAndView satlist()
 	{
 		ModelAndView mv= new ModelAndView();
@@ -131,7 +134,7 @@ public class AdminController
 		return mv;
 		
 	}
-	@RequestMapping("/categoryList")
+	@RequestMapping("/admin/categoryList")
 	public ModelAndView catlist()
 	{
 		ModelAndView mv= new ModelAndView();
@@ -140,5 +143,68 @@ public class AdminController
 		return mv;
 		
 	}
+
+		
+	@RequestMapping("/deleteProd/{pid}")
+	public String deleteProduct(@PathVariable("pid")int pid)
+	{
+		productDAOImpl.deleteProd(pid);
+		return "redirect:/admin/productList?del";
+	}
+	
+	
+	
+	
+	@RequestMapping("/updateProd")
+	public ModelAndView updateproduct(@RequestParam("pid") int pid)
+	{
+		ModelAndView mv= new ModelAndView();
+		Product p=productDAOImpl.findByPID(pid);
+		mv.addObject("prod",p);
+		mv.addObject("catList",categoryDAOImpl.retrieve());
+		mv.addObject("satList",supplierDAOImpl.retrieve());
+		mv.setViewName("updateProduct");
+		return mv;
+	}
+	@RequestMapping(value="/ProductUpdate",method=RequestMethod.POST)
+	@Transactional
+	public String updateprod(HttpServletRequest request,@RequestParam("file")MultipartFile file)
+	{
+		String pid= request.getParameter("pid");
+		Product prod= new Product();
+		prod.setPid(Integer.parseInt(pid));
+		
+	
+		prod.setPname(request.getParameter("pname"));
+		prod.setPrice(Double.parseDouble(request.getParameter("price")));
+		prod.setPdescription(request.getParameter("pdescription"));
+		prod.setPstock(Integer.parseInt(request.getParameter("pstock")));
+		String cat=request.getParameter("pCategory");
+		String sat=request.getParameter("pSupplier");
+		prod.setCategory(categoryDAOImpl.findByCatId(Integer.parseInt(cat)));
+		prod.setSupplier(supplierDAOImpl.findBySuppId(Integer.parseInt(sat)));
+		
+		String filepath =request.getSession().getServletContext().getRealPath("/");
+		String filename= file.getOriginalFilename();
+		prod.setImagName(filename);
+		productDAOImpl.updateprod(prod);
+		System.out.println("File path"+filepath);
+		try
+		{
+			byte imagebyte[]=file.getBytes();
+			BufferedOutputStream fos= new BufferedOutputStream(new FileOutputStream(filepath+"/resources/"+filename));
+			fos.write(imagebyte);
+			fos.close();
+		}
+		catch(IOException e)
+		{
+			e.printStackTrace();
+		}
+		return "redirect:/admin/productList?update";
+		
+	}
+
+	
+
 
 }

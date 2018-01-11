@@ -78,5 +78,30 @@ public void getData(Model m)
 {
 	m.addAttribute("catList", categoryDAOImpl.retrieve());
 }
+@RequestMapping(value="/goTologin",method=RequestMethod.GET)
+public ModelAndView goTOLogin()
+{
+	ModelAndView mv= new ModelAndView();
 
+	mv.setViewName("login");
+	return mv;
+	
+	
+}
+@RequestMapping("/userlogged")
+public String login(){
+	return "redirect:/";
+}
+
+
+@RequestMapping("/error")
+public String userError()
+{
+	return "error";
+}
+@RequestMapping("/relogin")
+public String relogin()
+{
+	return "redirect:/goTologin";
+}
 }
