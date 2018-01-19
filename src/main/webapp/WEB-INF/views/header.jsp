@@ -6,7 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <head>
-  <title>HOME DECORS</title>
+  <title>BeautiProduct</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -22,28 +22,32 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>                        
       </button>
-      <a class="navbar-brand" href="#">HOME DECORS</a>
+      <a class="navbar-brand" href="#">BeautiProduct</a>
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
         <li><a href="index">Home</a></li>
        <li><a href="contact"><i class="fa fa-adress-book" aria-hidden="true"></i></a>
             
-      <ul class="nav navbar-nav navbar-right">
-      <c:if test="${pageContext.request.userPrincipal.name==null}">
+  <ul class="nav navbar-nav navbar-right">
+     
+     <c:if test="${pageContext.request.userPrincipal.name==null}">
         <li><a href="${pageContext.request.contextPath}/goToregister"><span class="glyphicon glyphicon-user"></span> SignUp</a></li>
         <li><a href="${pageContext.request.contextPath}/goTologin"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
         </c:if>
+        
+        
+        
+        
         <c:if test="${pageContext.request.userPrincipal.name !=null}">
+
                 <li><a>Welcome: ${pageContext.request.userPrincipal.name}</a></li>
-                <li><a href="<c:url value="/j_spring_security_logout"/>">Logout</a></li>
+              <li><a href="<c:url value="/j_spring_security_logout"/>">Logout</a></li>
        </c:if>
                  
-        <c:if test="${pageContext.request.userPrincipal.name == 'shivanipantulu@gmail.com'}"> 
-    
-      
-     
-         <li><a href="${pageContext.request.contextPath}/admin/adding">Admin</a></li>
+        <c:if test="${pageContext.request.userPrincipal.name == 'shivanvithaam@gmail.com'}"> 
+        
+      <li><a href="${pageContext.request.contextPath}/admin/adding">Admin</a></li>
          
       
  <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="${pageContext.request.contextPath}/admin">Admin List<span class="caret"></span></a>
@@ -69,11 +73,26 @@
         </c:if>  
            
     
-       
-        <li><a href="${pageContext.request.contextPath}/goToCart"><span class="glyphicon glyphicon-shopping-cart"></span> Cart
+   
+             </ul>
+						
+						<li><a href="viewcart"> <span
+								class="glyphicon glyphicon-shopping-cart">
+									${CartPrice}${cartsize}</span>
+						</a></li>
+						<li><a href="showinvoice"> Invoice</a></li>
+					
         <i class="fa fa-cart-plus" aria-hidden="true"></i></a></li>
       </ul>
-      <li class="dropdown"><a href="index.html"
+      <c:choose>
+		<c:when test="${IfViewCartClicked}">
+			<c:import url="/WEB-INF/views/cart.jsp"></c:import>
+		</c:when>
+	</c:choose>
+      	
+    <ul class="nav navbar-nav navbar-right">
+
+						<li class="dropdown"><a href="index.html"
 						class="dropdown-toggle" data-toggle="dropdown" role="button"
 						aria-haspopup="true" aria-expanded="false"> <span
 							class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
@@ -81,21 +100,14 @@
 						<ul class="dropdown-menu">
 							<c:forEach items="${catList}" var="category">
 
-								<li><a class="alink"
-									href="${pageContext.request.contextPath} /productCustList/<c:out value="${category.cid}" />"> <c:out
-											value="${category.cname}" />
+								<li><a class="alink" href=" nav/<c:out value="${category.cid}" />"> <c:out value="${category.cname}" />
 								</a></li>
 
 							</c:forEach>
-   <%--    <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">
-      category choice<span class="caret"></span></a>
-      <ul class="dropdown-menu">
-      <c:forEach var="catval" items="${catList}">
-      <li><a href="${pageContext.request.contextPath} /productCustList?cid=${catval.cid}">${catval.cname}</a>
-      </li>
-      </c:forEach>
+						</ul></li>
+     
       </ul>
-      --%>
+      
     </div>
   </div>
 </nav>

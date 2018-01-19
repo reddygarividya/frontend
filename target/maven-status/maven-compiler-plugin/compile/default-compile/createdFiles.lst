@@ -1,2 +1,4 @@
 com\spring\controller\AdminController.class
+com\spring\controller\CartController.class
+com\spring\controller\CheckoutController.class
 com\spring\controller\HomeController.class

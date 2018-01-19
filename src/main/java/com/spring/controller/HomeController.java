@@ -1,41 +1,46 @@
 package com.spring.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.spring.dao.UserDAO;
-import com.spring.daoImpl.CategoryDAOImpl;
-import com.spring.daoImpl.ProductDAOImpl;
-import com.spring.daoImpl.SupplierDAOImpl;
-import com.spring.model.User;
+import com.spring.dao.*;
+import com.spring.model.*;
 
 @Controller
 public class HomeController {
-	
 	@Autowired
 	UserDAO userDAO;
 	
 	@Autowired
-	SupplierDAOImpl supplierDAOImpl;
+	SupplierDAO supplierDAO;
 	
 	@Autowired
-	CategoryDAOImpl categoryDAOImpl;
+	CategoryDAO categoryDAO;
 	
 	@Autowired
-	ProductDAOImpl productDAOImpl;
-	@RequestMapping("/")
-	public String index() 
-	{
-		return "index";
-
-	}
+	ProductDAO productDAO;
+	 @RequestMapping(value="/",  method=RequestMethod.GET)
+	    public String homePage(HttpSession session,Model m)
+	    {
+	    	session.setAttribute("categoryList", categoryDAO.retrieve());
+	    	session.setAttribute("ProductList",productDAO.retrieve());
+	   	/*session.setAttribute("CartList", cartDAO.listCart());*/
+	    /*	m.addAttribute("UserClickedshowproduct", "true");*/
+	    
+	    	
+	       return "index";
+	    }
 @RequestMapping(value="/goToregister",method=RequestMethod.GET)
 public ModelAndView goToregister()
 {
@@ -69,14 +74,14 @@ public ModelAndView saveUserData(@ModelAttribute("user")User user,BindingResult 
 public ModelAndView getCustTable(@RequestParam("cid") int cid)
 {
 	ModelAndView mv=new ModelAndView();
-	mv.addObject("prodList", productDAOImpl.getProdByCatId(cid));
+	mv.addObject("prodList", productDAO.findByPID(cid));
 	mv.setViewName("productCustList");
 	return mv;
 }
 @ModelAttribute
 public void getData(Model m)
 {
-	m.addAttribute("catList", categoryDAOImpl.retrieve());
+	m.addAttribute("catList", categoryDAO.retrieve());
 }
 @RequestMapping(value="/goTologin",method=RequestMethod.GET)
 public ModelAndView goTOLogin()
@@ -103,5 +108,15 @@ public String userError()
 public String relogin()
 {
 	return "redirect:/goTologin";
+}
+
+@RequestMapping(value ="nav/{id}" )
+public String ShowProductByCategory(@PathVariable("id") int id,RedirectAttributes attributes,Model m) {
+	
+	
+	
+  attributes.addFlashAttribute("ListProduct", productDAO.getProductByCategoryID(id));
+  
+    return "redirect:/";
 }
 }

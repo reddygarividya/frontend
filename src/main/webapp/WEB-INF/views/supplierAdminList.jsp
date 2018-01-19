@@ -14,7 +14,7 @@
 <h2>Supplier List For Admin</h2>
 <table class="table table-hover" id="apl" class="display" border="2" width="80" align="center">
 <tr>
-<th>Sl No</th>
+<th>S1 No</th>
 <th>Supplier ID</th>
 <th>Supplier Name</th>
 
@@ -26,7 +26,7 @@
 <td colspan="10" align="center">No record exists!!</td>
 </tr>
 </c:if>
-<c:forEach var="p" varStatus="st" items="${satlist}">
+<c:forEach var="p" varStatus="st" items="${satList}">
 <tr>
 <td><c:out value="${st.count}"></c:out></td>
 <td><c:out value="${p.sid }"></c:out></td>
@@ -35,8 +35,8 @@
 
 
 <td><c:set var="contextRoot" value="${pageContext.request.contextPath}"></c:set>
-<a class="btn btn-info" role="button" href="${contextRoot}/Edit">Edit</a>
-<a class="btn btn-danger" role="button" href="${contextRoot}/Delete">Delete</a>
+<a class="btn btn-info" role="button" href="${contextRoot}/admin/Edit">Edit</a>
+<a class="btn btn-danger" role="button" href="${contextRoot}/admin/Delete">Delete</a>
 
 
 <tr>
