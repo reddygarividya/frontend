@@ -76,10 +76,10 @@
       	 <div class ="jumbotron">
       	 <a class="btn btn-warning btn-block" href="${pageContext.request.contextPath}/processOrder">Place Order</a><br><br/>
       	 <p>Order Summary</p>
-      	 <h5> Items Subtotal :<span class="fa fa-inr"></span>${cartTotalAmount}</h5>
+      	 <h5> Items Subtotal :<span class="fa fa-inr"></span>${cartPrice}</h5>
       	 <h5> Delivery Charges:<span class="fa fa-inr"></span>   50.0 </h5>
       	 <hr/>
-      	 <c:set var="ordertot" value="${cartTotalAmount + 50.0}"></c:set>
+      	 <c:set var="ordertot" value="${cartPrice + 50.0}"></c:set>
       	 <p>OrderTotal: <span class="fa fa-inr"></span> ${ordertot}</p>
       
       	 </div>
@@ -108,7 +108,7 @@
 			<div class="media-body">
 			<c:forEach items="${productList}" var="product">	
 				<c:if test="${product.pid == cart.productid}">
-			<h4 class="media-heading"><a href="">${product.name}</a></h4>
+			<h4 class="media-heading"><a href="">${product.pname}</a></h4>
                                 <h5 class="media-heading"></h5>
                                 <span>Status: </span><span class="text-success"><strong>In Stock</strong></span>
                             </div>

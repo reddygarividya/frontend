@@ -14,7 +14,7 @@
 
 </head>
 
-<body>
+<body style = "background : url(http://s1.picswalls.com/wallpapers/2016/06/06/eiffel-tower-desktop-background_094749463_307.jpg); background-size:100% ;">
 <div class="bs-example">
     <nav id="myNavbar" class="navbar navbar-inverse" role="navigation">
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -31,35 +31,27 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li><a href="continue_shopping">HOME</a></li>
-                    <li class="">
-                        <a href="#" data-toggle="" class="dropdown-toggle"> <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="category"></a></li>
-                            <li><a href="#"></a></li>
-                            <li><a href="#"></a></li>
-                            <li class="divider"></li>
-                            <li><a href="#"></a></li>
-                        </ul>
-                    </li>
-                </ul>
+                   <li class="active"><a href="http://localhost:9999/FrontEcom/"><span
+							class="glyphicon glyphicon-home" aria-hidden="true"></span> HOME</a></li>
+                    </ul>
                  </div>
     </nav>
 </div>
 
 
 <div id="wrap">
-<div class="container clear-top">
+<div class="container clear-top" >
 <c:if test="${not empty addressList}">
 	<form  action="selectShippingAddress" method="post">
 			<h3>Select a delivery Address:</h3>
 			<hr>
-			<div class="row">
+			<div class="row" >
 			<c:forEach var="address" items="${addressList}" varStatus="loopCounter">
 			<div class="col-md-4 col-xs-4">
 						<c:choose>	
 						<c:when test="${loopCounter.index==0}">
 								<div class="radio">
+								<font color="red">
 								<input type="radio" name="shipaddress" value="${address.id}" checked> <p> ${address.name}<br/>
 					      		${address.address1}
 					      		<br/>${address.address2}
@@ -71,7 +63,7 @@
 					      		<c:when test="${not empty address.phone}">${address.phone}</c:when>
 					      		</c:choose>
 					      		 </p>
-					      		 </div>	
+					      		 </div>	</font>
 					      </c:when>
 					      <c:otherwise>
 					      	<div class="radio">

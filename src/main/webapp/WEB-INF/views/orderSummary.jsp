@@ -14,7 +14,7 @@
 <title>Order Summary</title>
 </head>
 
-<body>
+<body style = "background : url(http://s1.picswalls.com/wallpapers/2016/06/06/eiffel-tower-desktop-background_094749463_307.jpg); background-size:100% ;">
 
 <div class="bs-example">
     <nav id="myNavbar" class="navbar navbar-inverse" role="navigation">
@@ -32,17 +32,10 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li><a href="continue_shopping">HOME</a></li>
-                    <li class="">
-                        <a href="#" data-toggle="" class="dropdown-toggle"> <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="category"></a></li>
-                            <li><a href="#"></a></li>
-                            <li><a href="#"></a></li>
-                            <li class="divider"></li>
-                            <li><a href="#"></a></li>
-                        </ul>
-                    </li>
+                    
+                    <li class="active"><a href="http://localhost:9999/FrontEcom/"><span
+							class="glyphicon glyphicon-home" aria-hidden="true"></span> HOME</a></li>
+                    
                 </ul>
                  </div>
     </nav>
@@ -108,7 +101,7 @@
 			<div class="media-body">
 			<c:forEach items="${productList}" var="product">	
 				<c:if test="${product.pid == cart.productid}">
-			<h4 class="media-heading"><a href="">${product.name}</a></h4>
+			<h4 class="media-heading"><a href="">${product.pname}</a></h4>
                                 <h5 class="media-heading"></h5>
                                 <span>Status: </span><span class="text-success"><strong>In Stock</strong></span>
                             </div>

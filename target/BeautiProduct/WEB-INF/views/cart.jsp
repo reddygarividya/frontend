@@ -11,18 +11,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>CartPage</title>
 
-
-<link href="resources/lib/bootstrap-3.3.6/css/bootstrap.min.css" rel="stylesheet">
-<link href="resources/lib/bootstrap-3.3.6/css/bootstrap.css" rel="stylesheet" />
-
-<!-- scripts -->
-<script src="resources/lib/jquery/jquery-1.10.2.js"></script>
-<script src="resources/lib/bootstrap-3.3.6/js/bootstrap.min.js"></script>
-<style type="text/css">
-	.bs-example{
-    	margin: 20px;
-    }
-</style>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
 
@@ -47,7 +39,9 @@
                      
                         <td class="col-sm-8 col-md-6">
                         <div class="thumbnail">
-                         <a class="thumbnail pull-left" href="#"> <img src="/FrontEcom/imageDisplay?id=${cart.productid}" style="height:50px;height: 50px" > </a>
+                      	   <img height="100px"
+						width="100px" alt="${cart.productid}"
+						src="<c:url value="/resources/images/${cart.productid}.jpg"></c:url>"> </a>
                             <div class="media-body">
                                 <h4 class="media-heading"><a href="#">${cart.productName}</a></h4>
                                 <h5 class="media-heading"> by <a href="#">Brand name</a></h5>
@@ -72,7 +66,7 @@
                           
                     </c:forEach>   
                           
-                    <tr>
+                   <tr>
                         <td>   </td>
                         <td>   </td>
                         <td>   </td>
@@ -100,6 +94,11 @@
     </div>
 </div>
 
+
+<%-- <c:forEach items="${CartPrice}" var ="c">
+<c:out value="${c}"></c:out>
+</c:forEach>
+ --%>
 
 </body>
 

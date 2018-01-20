@@ -14,6 +14,7 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
+
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
@@ -117,18 +118,10 @@
 							href="${pageContext.request.contextPath}/Home">Hello <b><sec:authentication
 							property="principal.username" /></b></a></li>
   --%>
-			<%-- 			<li><c:url value="/j_spring_security_logout" var="logoutUrl" />
+						<%-- <li><c:url value="/j_spring_security_logout" var="logoutUrl" />
 							<a href="${logoutUrl}">Log Out</a><span
-							class="glyphicon glyphicon-log-out"></span></li>
+							class="glyphicon glyphicon-log-out"></span></li> --%>
 
-
-
-
-						<li><a href="viewcart"> <span
-								class="glyphicon glyphicon-shopping-cart">
-									${CartPrice}${cartsize}</span>
-						</a></li>
-						<li><a href="showinvoice"> Invoice</a></li>  --%>
 					
 		<%-- </sec:authorize> --%>
 				</ul>
@@ -215,6 +208,37 @@ $(function() {
 	<script src="resources/lib/jquery/jquery-1.10.2.js"></script>
 	<script src="resources/lib/bootstrap-3.3.6/js/bootstrap.min.js"></script>
 	<!-- <script src="resources/lib/bootstrap-3.3.6/js/bootstrap-auto-dismiss-alert.js"></script> -->
+	<div class="container">
+<div id="myCarousel" class="carousel slide" data-ride="carousel">
+ 
+  <ol class="carousel-indicators">
+    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+    <li data-target="#myCarousel" data-slide-to="1"></li>
+    <li data-target="#myCarousel" data-slide-to="2"></li>
+  </ol>
+
+  <div class="carousel-inner">
+    <div class="item active">
+      <img class="img-rounded" class="image-responsive center block" src="C:\Users\Test\Desktop\pics\vidya1.jpg" alt="image1"/>
+    </div>
+
+    <div class="item">
+      <img class="img-rounded" class="image-responsive center block" src="C:\Users\Test\Desktop\pics\vidya2.jpg" alt="image2"/>
+    </div>
+
+    <div class="item">
+      <img class="img-rounded" class="image-responsive center block" src="C:\Users\Test\Desktop\pics\vidya3.jpg" alt="image3"/>
+    </div>
+  </div>
+
+  <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+    <span class="glyphicon glyphicon-chevron-left"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="right carousel-control" href="#myCarousel" data-slide="next">
+    <span class="glyphicon glyphicon-chevron-right"></span>
+    <span class="sr-only">Next</span>
+  </a>
  
 </body>
 </html>
