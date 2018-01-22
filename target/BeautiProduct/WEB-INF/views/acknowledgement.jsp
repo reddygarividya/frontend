@@ -1,4 +1,3 @@
-
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1" isELIgnored="false"%>
  <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -13,7 +12,7 @@
 <title>Acknowledgement</title>
 </head>
 
-<body>
+<body style = "background : url(http://s1.picswalls.com/wallpapers/2016/06/06/eiffel-tower-desktop-background_094749463_307.jpg); background-size:100% ;">
 <div class="bs-example">
     <nav id="myNavbar" class="navbar navbar-inverse" role="navigation">
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -30,19 +29,19 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li><a href="continue_shopping">HOME</a></li>
-                    <li><a href="#"></a></li>
-                    
+<li class="active"><a href="http://localhost:9999/FrontEcom/"><span
+							class="glyphicon glyphicon-home" aria-hidden="true"></span> HOME</a></li>
+                                        
                 </ul>
                
-            </div><!-- /.navbar-collapse -->
+            </div>
         </div>
     </nav>
 </div>
 <div id="wrap">
 <div id="main" class="container clear-top">
 
-<h4><font color="blue">Your order has been placed successfully. Thank you for shopping with us.</font> </h4>
+<h4><font color="red">Your order has been placed successfully. Thank you for shopping with us.</font> </h4>
 
 <div class="row">
 	 <div class="col-sm-12 col-md-10 col-md-offset-1">
@@ -69,11 +68,11 @@
 			 <td class="col-sm-8 col-md-6">
 			<div class="media">
 			 <a class="thumbnail pull-left" href="">
-					<img class="img-responsive"  width="72px" height="72px" src="<c:url value="/resources/images/${order.productId}.jpg" ></c:url>"></a>
+					<img class="img-responsive"  width="72px" height="72px" src="${pageContext.request.contextPath}/resources/${order.imagName}>"></a>
 			<div class="media-body">
 			<c:forEach items="${productList}" var="product">	
 				<c:if test="${product.pid == order.productId}">
-			<h4 class="media-heading"><a href="">${product.name}</a></h4>
+			<h4 class="media-heading"><a href="">${product.pname}</a></h4>
                                 <h5 class="media-heading"></h5>
                                 <span>Status: </span><span class="text-success"><strong>In Stock</strong></span>
                             </div>

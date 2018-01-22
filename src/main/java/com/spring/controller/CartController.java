@@ -87,6 +87,7 @@ public class CartController
 			item.setUserId(userId);
 			item.setProductQuantity(q);
 			item.setStatus("C");
+			item.setImagName(p.getImagName());
 			item.setSubTotal(q * p.getPrice());
 			item.setProductPrice(p.getPrice());
 			cartDAO.saveProductToCart(item);
